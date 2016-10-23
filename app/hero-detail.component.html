@@ -8,4 +8,6 @@
   </div>
   <button (click)="goBack()">Back</button>
   <button (click)="save()">Save</button>
+  <button class="btn" (click)="openModal()">open details</button>
 </div>
+<hero-detail-modal [hero]="hero"></hero-detail-modal>

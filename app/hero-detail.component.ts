@@ -1,8 +1,9 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 
 import { Hero } from './hero';
 import { HeroService } from './hero.service';
+import { HeroDetailModalDirective } from './hero-detail-modal.directive';
 
 @Component({
   moduleId: module.id,
@@ -13,6 +14,7 @@ import { HeroService } from './hero.service';
 export class HeroDetailComponent implements OnInit {
   @Input() hero: Hero;
   @Output() close = new EventEmitter();
+  @ViewChild(HeroDetailModalDirective) heroDetailModalDirective: HeroDetailModalDirective;
   error: any;
   navigated = false; // true if navigated here
 
@@ -48,5 +50,8 @@ export class HeroDetailComponent implements OnInit {
   goBack(savedHero: Hero = null): void {
     this.close.emit(savedHero);
     if (this.navigated) { window.history.back(); }
+  }
+  openModal(){
+    this.heroDetailModalDirective.showHeroDetail();
   }
 }
